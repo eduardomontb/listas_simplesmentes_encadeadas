@@ -1,0 +1,82 @@
+/* Programa "LS_nota.cpp" para exemplificar uma lista simplesmente encadeada para guardar uma sequência de notas */
+
+/* Exercício 1: Refaça o programa anterior para que ele também armazene uma matrícula para cada aluno. */
+
+#include <stdio.h>
+#include <cstdlib>
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    char resp;
+    float valor;
+    int mat;
+
+    struct ListaAlunos {
+
+        char nome[50];
+        int matricula;
+        float nota;
+        struct ListaAlunos *prox_aluno; /* ponteiro para próxima alunos */
+
+    } inicio, *no;
+
+    system("cls");
+
+    printf("PROGRAMA PARA GUARDAR MATRICULAS EM UMA LISTA SIMPLESMENTE ENCADEADA\n");
+
+    inicio.prox_aluno = NULL; /* lista vazia */
+
+    no = &inicio; /* aponta para o inicio da lista */
+
+    do {
+
+        no->prox_aluno = (struct ListaAlunos *) malloc(sizeof(struct ListaAlunos));
+
+        no = no->prox_aluno;
+
+        printf("\nDigite o numero de matricula: ");
+        scanf("%d", &mat);
+
+        printf("\nDigite o nome do aluno: ");
+        cin >> no->nome;
+
+        printf("\nDigite a nota: ");
+        scanf("%f", &valor);
+
+        no->matricula = mat;
+
+        no->nota = valor;
+
+        no->prox_aluno = NULL;
+
+        printf("\nDeseja continuar? Sim[S] Nao[outra tecla]---->");
+
+        cin >> resp;
+
+    } while (resp == 'S' || resp == 's');
+
+    /* Exibindo as notas da lista */
+
+    no = inicio.prox_aluno;
+
+    printf("\nLISTA DAS MATRICULAS: ");
+
+    while (no) {
+
+        printf("\nmatricula: %d / ", no->matricula);
+        printf("nome: %s / ", no->nome);
+        printf("nota: %.1f\t", no->nota);
+
+        no = no->prox_aluno;
+    }
+
+    printf("\n");
+
+    system("pause");
+
+    return 0;
+}
