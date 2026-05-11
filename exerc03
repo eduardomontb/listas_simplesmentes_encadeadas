@@ -1,0 +1,101 @@
+/*
+    Criar um novo programa que contenha as mesmas funcionalidades do Exercício 2 da
+    atividade anterior, que envolveu o tema de lista simplesmente encadeada, para
+    trabalhar com as estruturas e funcionalidades de uma lista duplamente encadeada.
+*/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <windows.h>
+
+typedef struct Aluno{
+    int matricula;
+     char nome[50];
+     float notas[3];
+     struct Aluno *pProx;
+     struct Aluno *pAnt;
+}Aluno;
+
+Aluno inicio, *pAx, *pAn, *pPr;
+
+void salvarArquivo(){}
+
+void carregarArquivo(){}
+
+void cabecalho(){}
+
+void menu(){}
+
+void diario(){}
+
+void exibir(){}
+
+void inserir(){
+
+    do{
+
+    pAx = &inicio;
+
+    //vai ate o ultimo no
+    while(pAx->pProx != NULL){
+        pAx = pAx->pProx;
+    }
+
+    //a lista esta vazia?
+    if(pAx == &inicio){//sim
+        pAx->pProx = new Aluno; //cria novo no (pAX->pProx = vira o novo)
+        pAx->pProx->pAnt = NULL;
+    }else{ //não
+        pAx->pProx = new Aluno;
+        pAx->pProx->pAnt = pAx; //pAnt liga para o endereço de pAx
+    }
+
+    //anda para o novo no
+    pAx = pAx->pProx;
+
+    printf("matricula: ");
+    scanf("%d", &pAx->matricula);
+
+    printf("nome aluno: ");
+    fflush(stdin);
+    gets(pAx->nome);
+
+    printf("nota1: ");
+    scanf("%f", &pAx->notas[0]);
+
+    printf("nota2: ");
+    scanf("%f", &pAx->notas[1]);
+
+    pAx->notas[2] = (pAx->notas[0] + pAx->notas[1])/2;
+
+    pAx->pProx = NULL;
+
+    quant++;
+
+    printf("\n");
+    printf("\t+----------------------------------------+\n");
+    printf("\t|   Deseja editar os dados do discente   |\n");
+    printf("\t+----------------------------------------+\n");
+    printf("\t1 - SIM\n");
+    printf("\t2 - NAO\n");
+    printf("\t> informe a opcao: ");
+    scanf("%d", &resp);
+
+    }while(resp == 1);
+
+}
+
+void inserirOrdem(){}
+
+void remover(){}
+
+void editar(){}
+
+void rela1(){}
+
+void rela2(){}
+
+int main(){
+
+}
