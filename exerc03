@@ -2,12 +2,17 @@
     Criar um novo programa que contenha as mesmas funcionalidades do Exercício 2 da
     atividade anterior, que envolveu o tema de lista simplesmente encadeada, para
     trabalhar com as estruturas e funcionalidades de uma lista duplamente encadeada.
+
 */
 
 #include <stdio.h>
+#include <new>    //<alloc.h>
 #include <ctype.h>
+#include <iostream>
 #include <stdlib.h>
 #include <windows.h>
+
+using namespace std;
 
 typedef struct Aluno{
     int matricula;
@@ -19,21 +24,68 @@ typedef struct Aluno{
 
 Aluno inicio, *pAx, *pAn, *pPr;
 
+int resp = 0;
+char professor[50], turma[50], disciplina[50];
+
 void salvarArquivo(){}
 
 void carregarArquivo(){}
 
-void cabecalho(){}
+void cabecalho(){
 
-void menu(){}
+     system("cls");
 
-void diario(){}
+     printf("\tPROGRAMA PARA GERENCIAR A MATRICULA, O NOME E AS NOTAS\n");
+     printf("\tDE UM ALUNO USANDO UMA LISTA SIMPLESMENTE ENCADEADA\n");
 
-void exibir(){}
+}
+
+void diario(){
+
+   printf("\n\n\tPREENCHER OS DADOS DO CABECALHO DO DIARIO\n");
+   cout << "\tProfessor: ";
+   gets(professor);
+
+   cout << "\tDisciplina: ";
+   gets(disciplina);
+
+   cout << "\tTurma: ";
+   gets(turma);
+
+}
+
+void exibir(){
+
+    pAx = inicio.pProx;
+    system("cls");
+
+    printf("\t*********************** DIARIO ***********************\n");
+    printf("\tProfessor: %s\n", professor);
+    printf("\tDisciplina: %s\n", disciplina);
+    printf("\tTurma: %s\n", turma);
+    printf("\t------------------------------------------------------\n");
+    printf("\tmatricula\tnome\t\tnota1\tnota2\tmedia\n");
+
+    while(pAx){
+
+    printf("\t%d\t\t%s\t\t%.1f\t%.1f\t%.1f\n", pAx->matricula, pAx->nome, pAx->notas[0], pAx->notas[1], pAx->notas[2]);
+    printf("\t------------------------------------------------------\n");
+
+    pAx = pAx->pProx;
+    }
+
+    system("pause");
+}
 
 void inserir(){
 
+    system("cls");
+
     do{
+
+    printf("\t+----------------------------------------+\n");
+    printf("\t|             INSERIR ALUNO              |\n");
+    printf("\t+----------------------------------------+\n");
 
     pAx = &inicio;
 
@@ -54,33 +106,38 @@ void inserir(){
     //anda para o novo no
     pAx = pAx->pProx;
 
-    printf("matricula: ");
-    scanf("%d", &pAx->matricula);
+    printf("\tMatricula: ");
+    cin >> pAx->matricula;
+    getchar();
 
-    printf("nome aluno: ");
+    printf("\tNome aluno: ");
     fflush(stdin);
     gets(pAx->nome);
 
-    printf("nota1: ");
-    scanf("%f", &pAx->notas[0]);
+    printf("\tNota1: ");
+    cin >> pAx->notas[0];
 
-    printf("nota2: ");
-    scanf("%f", &pAx->notas[1]);
+    printf("\tNota2: ");
+    cin >> pAx->notas[1];
 
     pAx->notas[2] = (pAx->notas[0] + pAx->notas[1])/2;
 
     pAx->pProx = NULL;
 
-    quant++;
+    //quant++;
 
     printf("\n");
     printf("\t+----------------------------------------+\n");
-    printf("\t|   Deseja editar os dados do discente   |\n");
+    printf("\t|   Deseja continuar inserindo dados?    |\n");
     printf("\t+----------------------------------------+\n");
     printf("\t1 - SIM\n");
     printf("\t2 - NAO\n");
     printf("\t> informe a opcao: ");
     scanf("%d", &resp);
+
+    if(resp == 1){
+        system("cls");
+    }
 
     }while(resp == 1);
 
@@ -96,6 +153,79 @@ void rela1(){}
 
 void rela2(){}
 
+void menu(){
+
+     do{
+       system("cls");
+
+       printf("\t+----------------------+\n");
+       printf("\t|    MENU PRINCIPAL    |\n");
+       printf("\t+----------------------+\n\n");
+
+       printf("\t+----------------------+\n");
+       printf("\t| 1 - EXIBIR           |\n");
+       printf("\t| 2 - INSERIR          |\n");
+       printf("\t| 3 - INSERIR EM ORDEM |\n");
+       printf("\t| 4 - REMOVER          |\n");
+       printf("\t| 5 - EDITAR           |\n");
+       printf("\t| 6 - RELATORIO 1      |\n");
+       printf("\t| 7 - RELATORIO 2      |\n");
+       printf("\t| 8 - SAIR             |\n");
+       printf("\t+----------------------+\n");
+
+       printf("\n\t> informe a opcao: ");
+       scanf("%d", &resp);
+       printf("\n");
+
+    switch(resp){
+
+    case 1:
+        exibir();
+        break;
+
+    case 2:
+        inserir();
+        break;
+
+    case 3:
+        //inserirOrdem();
+        break;
+
+    case 4:
+        //remover();
+        break;
+
+    case 5:
+        //editar();
+        break;
+
+    case 6:
+        //rela1();
+        break;
+
+    case 7:
+        //rela2();
+        break;
+
+    case 8:
+        printf("\tEncerrando programa...\n");
+        break;
+
+    default:
+        printf("\n\t[AVISO] Opcao invalida! [AVISO]\n");
+        system("pause");
+        break;
+
+    }
+
+   }while(resp != 8);
+
+}
+
 int main(){
+    cabecalho();
+    diario();
+
+    menu();
 
 }
